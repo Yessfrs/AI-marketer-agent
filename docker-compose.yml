@@ -1,0 +1,21 @@
+services:
+  backend:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    image: yassinemaydena/backend:latest
+    container_name: backend
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+    environment:
+      - MONGO_URI=mongodb+srv://yassinefares_db_user:yassinefares_db_user@cluster0.zbahme7.mongodb.net/scraping.db
+      - FLASK_SECRET=votre_secret_flask
+    networks:
+      - scraper_network
+
+networks:
+  scraper_network:
+    driver: bridge
